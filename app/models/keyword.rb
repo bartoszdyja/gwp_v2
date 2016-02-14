@@ -19,7 +19,7 @@ class Keyword < ActiveRecord::Base
       p links = response.map { |item| URI.parse(item['link']).host}
       links.find_index(URI.parse(website).host) || 'Not in the first 10'
     else
-      'Please try again later'
+      'Daily limit exceeded.'
     end
   end
 end
