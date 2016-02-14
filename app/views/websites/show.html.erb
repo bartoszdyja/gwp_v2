@@ -1,0 +1,30 @@
+<div class="row">
+  <div class="col-md-7 col-md-offset-1">
+    <h3><%=@website.name%></h3>
+    <hr>
+    <table class='table table-striped'>
+      <thead>
+        <tr>
+          <th>Phrase</th>
+          <th>Current google position</th>
+          <th>Edit</th>
+        </tr>
+      </thead>
+      <tbody>
+        <%- @website.keywords.each do |p| %>
+          <tr>
+            <td><%= p.phrase %></td>
+            <td><%= p.positions.last.try(:formatted_rank) %></td>
+            <td><%=link_to 'Destroy', website_keyword_path(@website, p), method: :delete %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <hr>
+    <%= simple_form_for(@keyword, url: website_keywords_path(@website), method: :post) do |k| %>
+      <%= k.input :phrase %>
+      <%= k.button :submit, 'Add phrase' %>
+    <% end %>
+
+  </div>
+</div>

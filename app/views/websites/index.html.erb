@@ -1,0 +1,23 @@
+<h2>Websites you're monitoring:</h2>
+<table class='table table-striped'>
+  <thead>
+    <tr>
+      <th>Name:</th>
+      <th>Url:</th>
+      <th>Current status:</th>
+      <th>Go:</th>
+    </tr>
+  </thead>
+<tbody>
+<%- @websites.each do |w| %>
+  <tr>
+    <td><%=w.name%></td>
+    <td><%=w.url %></td>
+    <td><%= w.check_status %></td>
+    <td><%=link_to 'Check position', account_website_path(@account, w), class: 'btn btn-default' %></td>
+  </tr>
+<% end %>
+</tbody>
+</table>
+
+<%=link_to 'Add new website', new_account_website_path(params[:account_id]), class: 'btn btn-default' %>

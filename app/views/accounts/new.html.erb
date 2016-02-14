@@ -1,0 +1,5 @@
+<h1>Accounts#new</h1>
+<%= form_for(@account, url: user_accounts_path, method: :post)  do |a| %>
+  <%= a.text_field :name %>
+  <%= a.button :submit %>
+<% end %>
