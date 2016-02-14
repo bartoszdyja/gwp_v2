@@ -1,13 +1,16 @@
 <div class="row">
   <div class="col-md-7 col-md-offset-1">
     <h3><%=@website.name%></h3>
+    <h5><%=@website.url%></h5>
     <hr>
     <table class='table table-striped'>
       <thead>
         <tr>
           <th>Phrase</th>
-          <th>Current google position</th>
-          <th>Edit</th>
+          <th>Google position</th>
+          <th>Last check</th>
+          <th>Check again</th>
+          <th>Destroy</th>
         </tr>
       </thead>
       <tbody>
@@ -15,6 +18,8 @@
           <tr>
             <td><%= p.phrase %></td>
             <td><%= p.positions.last.try(:formatted_rank) %></td>
+            <td><%= p.positions.last.formatted_creation_date %></td>
+            <td><%=link_to 'Check again', website_keyword_path(@website, p), method: :put %></td>
             <td><%=link_to 'Destroy', website_keyword_path(@website, p), method: :delete %></td>
           </tr>
         <% end %>
@@ -25,6 +30,7 @@
       <%= k.input :phrase %>
       <%= k.button :submit, 'Add phrase' %>
     <% end %>
-
+    <hr>
+    <%=link_to 'Back', account_websites_path(@website.account), class: 'btn btn-default' %>
   </div>
 </div>

@@ -16,7 +16,7 @@ class Keyword < ActiveRecord::Base
     if conn.status == 200
       response = JSON.parse(conn.body)['items']
       return 'Error! Nothing found' if response.blank?
-      p links = response.map {|item| URI.parse(item['link']).host}
+      p links = response.map { |item| URI.parse(item['link']).host}
       links.find_index(URI.parse(website).host) || 'Not in the first 10'
     else
       'Please try again later'

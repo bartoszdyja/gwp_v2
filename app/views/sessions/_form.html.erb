@@ -1,6 +1,6 @@
 <%= simple_form_for(:session, url: login_path) do |f| %>
-    <%= f.input :first_name %>
-    <%= f.input :last_name %>
-    <%= f.input :password %>
+    <%= f.input :first_name, input_html: { value: 'Adam' } %>
+    <%= f.input :last_name, input_html: { value: 'Nowak' } %>
+    <%= f.input :password, input_html: { value: '123456' } %>
     <%= f.button :submit, 'Login' %>
 <% end %>

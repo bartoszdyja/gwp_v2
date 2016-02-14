@@ -2,12 +2,12 @@
   <div class="col-md-3 col-md-offset-4">
     <%- if @accounts.any? %>
       <h4>Your accounts:</h4>
-      
+
       <%- @accounts.each do |a| %>
         <h4><%= link_to a.name, account_websites_path(a) %></h4>
       <% end %>
     <% end %>
-
+    <hr>
     <%= link_to 'Add new account', new_user_account_path(current_user), class: 'btn btn-default' %>
   </div>
 </div>
