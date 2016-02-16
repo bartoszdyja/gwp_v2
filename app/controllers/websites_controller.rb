@@ -8,7 +8,7 @@ class WebsitesController < ApplicationController
     @website = Website.new(websites_params)
     @website.account_id = params[:account_id]
     if @website.save
-      redirect_to account_websites_path, flash: {success: 'Website added'}
+      redirect_to account_websites_path, success: 'Website added'
     else
       flash.now[:error] = 'Something went wrong'
       render 'new'
@@ -18,7 +18,6 @@ class WebsitesController < ApplicationController
   def show
     @keyword = Keyword.new
     @website = Website.includes(:keywords).find(params[:id])
-    # @keywords = @website.keywords
   end
 
   def index

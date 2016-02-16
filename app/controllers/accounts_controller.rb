@@ -7,7 +7,7 @@ class AccountsController < ApplicationController
   def create
     @account = current_user.accounts.build(account_params)
     if @account.save
-      redirect_to root_path, flash: {success: 'New account added'}
+      redirect_to root_path, success: 'Account created'
     else
       flash[:error] = 'Name cannot be blank'
       render 'new'
@@ -26,5 +26,5 @@ class AccountsController < ApplicationController
     params.require(:account).permit(:name)
   end
 
-  
+
 end

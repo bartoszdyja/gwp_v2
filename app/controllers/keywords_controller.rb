@@ -8,7 +8,8 @@ class KeywordsController < ApplicationController
   def create
     @keyword = @website.keywords.create(keyword_params)
     if @keyword.save
-      redirect_to account_website_path(@website.account, @website)
+      flash[:success] = 'Website created'
+      redirect_to account_website_path(@website.account, @website), success: 'Website created'
     else
       flash[:error] = 'Something went wrong'
       render 'new'
@@ -20,15 +21,15 @@ class KeywordsController < ApplicationController
 
   def update
     if @keyword.check_position
-      redirect_to account_website_path(@website.account, @website), flash: {success: 'Position updated'}
+      redirect_to account_website_path(@website.account, @website), success: 'Position updated'
     else
-      redirect_to account_website_path(@website.account, @website), flash: {error: "That didn't work out."}
+      redirect_to account_website_path(@website.account, @website), error: "That didn't work out."
     end
   end
 
   def destroy
     @keyword.destroy
-    redirect_to account_website_path(@website.account, @website), flash: {alert: 'Keyword deleted'}
+    redirect_to account_website_path(@website.account, @website), alert: 'Keyword deleted'
   end
 
   private

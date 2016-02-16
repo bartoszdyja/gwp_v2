@@ -9,7 +9,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       login(@user)
-      redirect_to root_path, flash: { notice: 'User successfully created' }
+      redirect_to root_path, notice: 'User successfully created'
     else
       flash.now[:error] = 'Cannot save user'
       render 'new'
@@ -31,6 +31,6 @@ class UsersController < ApplicationController
   end
 
   def authenticate_user
-    redirect_to login_path, flash: { error: 'You need to sign in.' } if current_user.id != params[:id].to_i
+    redirect_to login_path, error: 'You need to sign in.' if current_user.id != params[:id].to_i
   end
 end
