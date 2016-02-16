@@ -19,6 +19,7 @@ RSpec.describe User, type: :model do
     it { is_expected.to respond_to :password_confirmation }
   end
 
+  it { is_expected.to have_many :accounts} 
   it { is_expected.to have_secure_password }
   it { is_expected.to validate_length_of(:password).is_at_least(6) }
 end
