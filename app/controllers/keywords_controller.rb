@@ -6,7 +6,7 @@ class KeywordsController < ApplicationController
   end
 
   def create
-    @keyword = @website.keywords.create(keyword_params)
+    @keyword = Keyword.create(keyword_params)
     if @keyword.save
       flash[:success] = 'Website created'
       redirect_to account_website_path(@website.account, @website), success: 'Website created'
@@ -43,6 +43,6 @@ class KeywordsController < ApplicationController
   end
 
   def keyword_params
-    params.require(:keyword).permit(:phrase)
+    params.require(:keyword).permit(:phrase).merge(website_id: params[:website_id])
   end
 end
