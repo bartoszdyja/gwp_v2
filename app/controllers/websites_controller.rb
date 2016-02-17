@@ -28,7 +28,7 @@ class WebsitesController < ApplicationController
   private
 
   def websites_params
-    params.require(:website).permit(:name, :url, :account_id)
+    params.require(:website).permit(:name, :url)
   end
 
   def authorize_account_owner
