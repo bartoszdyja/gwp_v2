@@ -28,8 +28,11 @@ class KeywordsController < ApplicationController
   end
 
   def destroy
-    @keyword.destroy
-    redirect_to account_website_path(@website.account, @website), alert: 'Keyword deleted'
+    if @keyword.website.account.user == current_user
+      redirect_to account_website_path(@website.account, @website), alert: 'Keyword deleted' if @keyword.destroy
+    else
+      render plain: 'This is not allowed.'
+    end
   end
 
   private
@@ -39,7 +42,7 @@ class KeywordsController < ApplicationController
   end
 
   def set_keyword
-    @keyword = Keyword.find(params[:id])
+    @keyword = Keyword.find_by_id(params[:id])
   end
 
   def keyword_params
