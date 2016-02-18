@@ -3,7 +3,7 @@ class SessionsController < ApplicationController
   end
 
   def create
-    user = User.where('first_name = ? AND last_name = ?', user_params[:first_name].capitalize, user_params[:last_name].capitalize).take
+    user = User.find_by(email: params[:session][:email])
     if user && user.authenticate(user_params[:password])
       login(user)
       redirect_to root_path, success: 'Successfully logged in'
@@ -21,7 +21,7 @@ class SessionsController < ApplicationController
   private
 
   def user_params
-    params.require(:session).permit(:first_name, :last_name, :password)
+    params.require(:session).permit(:email, :password)
   end
 
 end

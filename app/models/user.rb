@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
   has_secure_password
-  validates :email,:first_name, :last_name, :password, :password_confirmation, presence: true
+  validates :email, :first_name, :last_name, :password, :password_confirmation, presence: true
   validates :password, length: { minimum: 6 }
   before_save :upcase_credentials
 
@@ -11,4 +11,5 @@ class User < ActiveRecord::Base
   def upcase_credentials
     [first_name, last_name].map(&:capitalize!)
   end
+
 end
