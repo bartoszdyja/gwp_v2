@@ -17,6 +17,9 @@ class KeywordsController < ApplicationController
   end
 
   def show
+    @keyword = Keyword.find(params[:id])
+    @website = Website.find(params[:website_id])
+    @positions = @keyword.positions
   end
 
   def update

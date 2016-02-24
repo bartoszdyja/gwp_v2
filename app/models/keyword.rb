@@ -7,7 +7,8 @@ class Keyword < ActiveRecord::Base
   # private
 
   def check_position
-    positions.create(rank: hit_google(website.url, phrase))
+    response = hit_google(website.url, phrase)
+    positions.create(rank: response[:rank], links: response[:links])
   end
 
   def hit_google(website, keyword)
@@ -16,10 +17,11 @@ class Keyword < ActiveRecord::Base
     if conn.status == 200
       response = JSON.parse(conn.body)['items']
       return 'Error! Nothing found' if response.blank?
-      p links = response.map { |item| URI.parse(item['link']).host}
-      links.find_index(URI.parse(website).host) || 'Not in the first 10'
+      links = response.map { |item| URI.parse(item['link']).host}
+      rank = links.find_index(URI.parse(website).host) || 'Not in the first 10'
+      {rank: rank, links: links}
     else
-      'Daily limit exceeded.'
+      {rank: 'Daily limit exceeded.'}
     end
   end
 end

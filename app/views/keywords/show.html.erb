@@ -1,2 +1,8 @@
-<h1>Keywords#show</h1>
-<p>Find me in app/views/keywords/show.html.erb</p>
+<h1><%= @keyword.phrase %></h1>
+<p><%= @website.name %></p>
+
+<%- @positions.each do |p| %>
+  <p><%= p.rank %>
+  <%= p.created_at %>
+  <%= p.links %></p>
+<% end %>
