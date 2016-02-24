@@ -6,11 +6,12 @@ class AccountsController < ApplicationController
   end
 
   def create
+    @user = User.find(params[:user_id])
     @account = current_user.accounts.build(account_params)
     if @account.save
-      redirect_to root_path, success: 'Account created'
+      redirect_to user_accounts_path(@user), success: 'Account created'
     else
-      flash[:error] = 'User was not created. Please try again'
+      flash.now[:error] = 'This account was not created. Please try again.'
       render 'new'
     end
   end

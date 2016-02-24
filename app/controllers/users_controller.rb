@@ -14,6 +14,10 @@ class UsersController < ApplicationController
     end
   end
 
+  def edit
+    @user = User.find(params[:id])
+  end
+
   def index
     @accounts = current_user.try(:accounts)
   end
@@ -22,13 +26,24 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
   end
 
+  def update
+    @user = User.find(params[:id])
+    @user.update(user_params)
+    redirect_to user_accounts_path(@user)
+  end
+
   def activate
-    user = User.find_by_email(params[:email])
-    token = Base64.decode64(params[:id])
-    return false unless BCrypt::Password.new(token).is_password?(user.id)
-    user.update(activated: true)
-    login(user)
-    redirect_to user_accounts_path(user), success: 'You have activated your account'
+    begin
+      user = User.find_by_email(params[:email])
+      token = Base64.decode64(params[:id])
+      return false unless BCrypt::Password.new(token).is_password?(user.id)
+      user.update(activated: true)
+      login(user)
+      redirect_to user_accounts_path(user), success: 'You have activated your account'
+    rescue
+      flash[:error] = 'Something went wrong'
+      redirect_to root_path
+    end
   end
 
   private

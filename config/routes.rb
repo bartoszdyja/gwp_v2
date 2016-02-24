@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   delete 'logout', to: 'sessions#destroy'
   get 'users/:id/activate',to: 'users#activate', as: 'activate'
 
-  resources :users, only: [:new, :create] do
+  resources :users, only: [:new, :create, :edit, :show, :update] do
     resources :accounts
   end
 
