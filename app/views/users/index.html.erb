@@ -1,12 +1,20 @@
-<%- if user_signed_in? %>
-  <h4><%= current_user.first_name %>'s dashboard</h4>
+<div class='text-center'>
+  <h1> Welcome to Website Google Position </h1>
   <hr>
-  <%= render 'accounts/index' %>
-<% else  %>
-<div class="row">
-  <div class="col-md-3 col-md-offset-4">
-    <h3>Sign in</h3>
-    <%= render 'sessions/form' %>
-  </div>
+  <%- if !user_signed_in? %>
+    <h4> Sign up to start using the service</h4>
+    <%=link_to 'Sign up', new_user_path, class: 'btn btn-primary' %>
+  <% end %>
 </div>
-<% end %>
+<!-- # <%- if user_signed_in? && current_user.activated%>
+#   <h4><%= current_user.first_name %>'s dashboard</h4>
+#   <hr>
+#   <%= render 'accounts/index' %>
+# <% else  %>
+# <div class="row">
+#   <div class="col-md-3 col-md-offset-4">
+#     <h3>Sign in</h3>
+#     <%= render 'sessions/form' %>
+#   </div>
+# </div>
+# <% end %> -->

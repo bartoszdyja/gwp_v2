@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1><%= @is%>Welcome to Google Website Position, <%= @token1%></h1>
+    <p>
+      You have successfully signed up<br>
+    </p>
+    <p>
+      To login to the site, just follow this link: <%=link_to 'Activate', activate_path(@token, email: @user.email) %>
+    </p>
+    <p>Thanks for joining and have a great day!</p>
+  </body>
+</html>

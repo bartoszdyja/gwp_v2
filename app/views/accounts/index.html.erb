@@ -1,0 +1,12 @@
+<%- if user_signed_in?%>
+  <h4><%= current_user.first_name %>'s dashboard</h4>
+  <hr>
+  <%= render 'accounts/index' %>
+<% else  %>
+  <div class="row">
+    <div class="col-md-3 col-md-offset-4">
+      <h3>Sign in</h3>
+      <%= render 'sessions/form' %>
+    </div>
+  </div>
+<% end %>

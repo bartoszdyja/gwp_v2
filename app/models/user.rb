@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
   has_secure_password
-  validates :email, :first_name, :last_name, :password, :password_confirmation, presence: true
-  validates :password, length: { minimum: 6 }
+  validates :email, :first_name, :last_name, presence: true
+  validates :password, length: { minimum: 6 }, allow_nil: true
   before_save :upcase_credentials
 
   has_many :accounts

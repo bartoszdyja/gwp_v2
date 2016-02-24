@@ -6,4 +6,8 @@ class ApplicationController < ActionController::Base
   include Auth
   helper_method :user_signed_in?
   helper_method :current_user
+
+  def authenticate_user
+    redirect_to login_path, error: 'You need to sign in.' if current_user.try(:id) != params[:user_id].to_i
+  end
 end

@@ -3,10 +3,11 @@ class SessionsController < ApplicationController
   end
 
   def create
-    user = User.find_by(email: params[:session][:email])
+    user = User.find_by_email( params[:session][:email] )
+    return redirect_to root_path, error: 'Account not active. Please check your email.' unless user.activated
     if user && user.authenticate(user_params[:password])
       login(user)
-      redirect_to root_path, success: 'Successfully logged in'
+      redirect_to user_accounts_path(user), success: 'Successfully logged in'
     else
       flash.now[:error] = 'Invalid user / password'
       render 'new'
