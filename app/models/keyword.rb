@@ -19,7 +19,7 @@ class Keyword < ActiveRecord::Base
       return 'Error! Nothing found' if response.blank?
       links = response.map { |item| URI.parse(item['link']).host}
       rank = links.find_index(URI.parse(website).host) || 'Not in the first 10'
-      {rank: rank, links: links}
+      {rank: rank, links: links[0..rank-1]}
     else
       {rank: 'Daily limit exceeded.'}
     end
