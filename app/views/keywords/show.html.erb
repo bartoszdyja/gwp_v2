@@ -1,8 +1,28 @@
-<h1><%= @keyword.phrase %></h1>
+<h1>
+  <%= @keyword.phrase %>
+  <%=link_to 'Check again', website_keyword_path(@website, @keyword), method: :put, class: 'btn btn-primary' %>
+</h1>
 <p><%= @website.name %></p>
-
+<table class='table table-striped'>
+  <thead>
+    <tr>
+      <th>Rank</th>
+      <th>Date</th>
+      <th>Rivals</th>
+      <th>Delete</th>
+    </tr>
+  </thead>
+  <tbody>
 <%- @positions.each do |p| %>
-  <p><%= p.rank %>
-  <%= p.created_at %>
-  <%= p.links %></p>
+    <tr>
+      <td><b><%= p.rank %></b></td>
+        <td><%= formatted_creation_date(p.created_at) %>
+        </td>
+        <td>
+          <%- p.links.each do |l| %>
+    <p><%= l %></p>
+  <% end %></p>
+</td>
+<td><%=link_to 'Destroy', website_keyword_path(@website, @keyword), method: :delete %></td>
 <% end %>
+</table>

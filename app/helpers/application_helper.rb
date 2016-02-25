@@ -15,4 +15,10 @@ module ApplicationHelper
    end
    nil
  end
+
+ def formatted_creation_date(date)
+   time_ago_in_words(date) + ' ago'
+ end
+
+
 end

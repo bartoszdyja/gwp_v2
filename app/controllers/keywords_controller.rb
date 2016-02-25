@@ -6,9 +6,8 @@ class KeywordsController < ApplicationController
   end
 
   def create
-    @keyword = Keyword.create(keyword_params)
+    @keyword = Keyword.new(keyword_params)
     if @keyword.save
-      flash[:success] = 'Website created'
       redirect_to account_website_path(@website.account, @website), success: 'Website created'
     else
       flash[:error] = 'Something went wrong'
@@ -19,12 +18,12 @@ class KeywordsController < ApplicationController
   def show
     @keyword = Keyword.find(params[:id])
     @website = Website.find(params[:website_id])
-    @positions = @keyword.positions
+    @positions = @keyword.positions.order('created_at DESC')
   end
 
   def update
     if @keyword.check_position
-      redirect_to account_website_path(@website.account, @website), success: 'Position updated'
+      redirect_to website_keyword_path(@website, @keyword), success: 'Position updated'
     else
       redirect_to account_website_path(@website.account, @website), error: "That didn't work out."
     end

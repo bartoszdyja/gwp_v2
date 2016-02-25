@@ -10,8 +10,6 @@
           <th>Google position</th>
           <th>Last check</th>
           <th>Check again</th>
-          <th>Destroy</th>
-          <th>Details</th>
         </tr>
       </thead>
       <tbody>
@@ -19,9 +17,7 @@
           <tr>
             <td><%= p.phrase %></td>
             <td><%= p.positions.last.try(:formatted_rank) %></td>
-            <td><%= p.positions.last.formatted_creation_date %></td>
-            <td><%=link_to 'Check again', website_keyword_path(@website, p), method: :put %></td>
-            <td><%=link_to 'Destroy', website_keyword_path(@website, p), method: :delete %></td>
+            <td><%= formatted_creation_date(p.positions.last.created_at) %></td>
             <td><%=link_to 'Details', website_keyword_path(@website, p) %></td>
           </tr>
         <% end %>
