@@ -20,6 +20,7 @@ class UsersController < ApplicationController
 
   def index
     @accounts = current_user.try(:accounts)
+    HardWorker.perform_async('bob', 5)
   end
 
   def show

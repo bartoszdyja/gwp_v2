@@ -13,6 +13,8 @@ gem 'bootstrap-sass', '~> 3.3.6'
 gem 'simple_form'
 gem 'faraday'
 gem 'figaro'
+gem 'sidekiq'
+gem 'puma'
 
 group :development, :test do
   gem 'byebug'
