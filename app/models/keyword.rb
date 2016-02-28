@@ -1,7 +1,7 @@
 class Keyword < ActiveRecord::Base
   belongs_to :website
   has_many :positions, dependent: :destroy
-
+  validates :phrase, presence: true
   after_commit :check_position
 
   # private

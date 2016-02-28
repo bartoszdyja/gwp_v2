@@ -9,7 +9,7 @@ class Website < ActiveRecord::Base
   end
 
   def check_status
-    self.url = "http://#{url}" unless url[/^https?:\/\//]
+    self.url = "http://#{url}" unless url && url[/^https?:\/\//]
     begin
       Faraday.head(url).status
     rescue Faraday::Error::ConnectionFailed

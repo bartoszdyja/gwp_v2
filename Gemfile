@@ -22,6 +22,7 @@ group :test do
   gem 'rspec-rails'
   gem 'shoulda-matchers'
   gem 'capybara'
+  gem 'simplecov', require: false
 end
 
 group :development do

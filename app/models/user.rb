@@ -10,7 +10,7 @@ class User < ActiveRecord::Base
   private
 
   def upcase_credentials
-    [first_name, last_name].map(&:capitalize!)
+    [first_name, last_name].compact.map(&:capitalize!)
   end
 
 end

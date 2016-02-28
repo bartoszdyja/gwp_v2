@@ -24,9 +24,5 @@ RSpec.describe Position do
       expect(position).to be_valid
       expect(position.formatted_rank).to eq 1
     end
-
-    it 'should return formatted creation date' do
-      expect(position.formatted_creation_date).to eq 'less than a minute ago'
-    end
   end
 end
